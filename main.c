@@ -49,7 +49,6 @@ static void doVersion(char **argv)
     printf ("%s version %s \n", argv[0], VersionString );
 }
 
-
 /*
 int is_letter(char c);
 int is_letter(char c) 
@@ -68,10 +67,8 @@ static int gramado_initialize(void)
     //printf ("gramado_initialize:\n");
 
 // Clear buffers
-
     infile_size = 0;
     outfile_size = 0;
-
 
 // Clear infile and outfile buffers.
     for ( i=0; i<INFILE_MAX_SIZE; i++ ){
