@@ -129,8 +129,14 @@ static int gramado_initialize(void)
     {
         metadata[i].id = 0;
         metadata[i].initialized = FALSE;
+
+        //metadata[i].meta_tag[0] = 0;
         metadata[i].tag_size = 0;
+
+        //metadata[i].name[0] = 0;
         metadata[i].name_size = 0;
+
+        //metadata[i].content[0] = 0;
         metadata[i].content_size = 0;
     };
 

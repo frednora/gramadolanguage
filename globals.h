@@ -4,6 +4,13 @@
 #ifndef __GLOBALS_H
 #define __GLOBALS_H    1
 
+
+// Size of buffers inside the metadata_d structure.
+#define METATAG_COUNT_MAX  64
+#define NAME_COUNT_MAX  64
+#define CONTENT_COUNT_MAX  128
+// ...
+
 // We need 2 asm statement inside a block {} to fill
 // a single structure.
 struct metadata_d
@@ -20,6 +27,7 @@ struct metadata_d
     char content[128];
     size_t content_size;
 };
+//#define ???MAX  32
 extern struct metadata_d  metadata[32];
 
 // Contador para não estourar a lista. 
