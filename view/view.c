@@ -91,7 +91,7 @@ static int __generate_html_output_file(void)
     strcat(html_buffer, "<!DOCTYPE html>\n");
     
     // html
-    strcat(html_buffer, "<html leng=\"en\">\n");
+    strcat(html_buffer, "<html lang=\"en\">\n");
 
     // head
     strcat(html_buffer, "<head>\n");
@@ -104,6 +104,26 @@ static int __generate_html_output_file(void)
 
     // body
     strcat(html_buffer, "<body>\n");
+
+
+/*
+// #bugbug: Buffer overflow
+// Insert enhancements here
+
+strcat(html_buffer, "<nav style=\"background:#333;padding:10px;\">\n");
+strcat(html_buffer, "<a href=\"/\" style=\"color:#fff;margin-right:15px;text-decoration:none;\">Home</a>\n");
+strcat(html_buffer, "<a href=\"/about\" style=\"color:#fff;margin-right:15px;text-decoration:none;\">About</a>\n");
+strcat(html_buffer, "<a href=\"/contact\" style=\"color:#fff;text-decoration:none;\">Contact</a>\n");
+strcat(html_buffer, "</nav>\n");
+
+strcat(html_buffer, "<header style=\"padding:40px 0;text-align:center;background:#f4f4f4;\">\n");
+strcat(html_buffer, "<h1>Welcome to GramadoLanguage!</h1>\n");
+strcat(html_buffer, "<p style=\"font-size:1.2em;color:#555;\">Fast. Simple. Beautiful HTML Output.</p>\n");
+strcat(html_buffer, "</header>\n");
+
+strcat(html_buffer, "<hr>\n");
+// ------------------------------------------------------
+*/
 
 // Metadata
     for (i=0; i<MetadataMaxIndex; i++)

@@ -14,7 +14,8 @@ box One
 meta Expression00()
 {
     //return 1 + 2;
-    return 100 * 8;
+    //return 100 * 8;
+    return;
 }
 
 ] 
