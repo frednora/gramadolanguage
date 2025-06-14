@@ -77,7 +77,7 @@ static int parse_content(int token);
 static int parse_do(int token);
 static int parse_for(int token);
 static int parse_if(int token);
-static int parse_return(int token);
+static int parse_return(int token, unsigned long *ret_value);
 static unsigned long parse_sizeof(int token);
 static int parse_while(int token);
 //static int parse_number(int olen);
@@ -662,7 +662,7 @@ static int parse_number(int olen)
 // return (int) (1+2);
 // return function();
 // return (int) function();
-static int parse_return(int token)
+static int parse_return(int token, unsigned long *ret_value)
 {
     int c=0;
     int running = 1;
@@ -690,6 +690,11 @@ static int parse_return(int token)
 // Eval
 
     eval_ret = (unsigned long) tree_eval();
+
+// Return via parameter.
+    if (ret_value != NULL){
+        *ret_value = eval_ret;
+    }
 
     //#todo: #bugbug
 // itoa
@@ -2221,16 +2226,19 @@ int parse(int dump_output)
                         // STMT: 'return'.
                         if (keyword_found == KWRETURN)
                         {
+                            unsigned long __return_value = 0;
                             // #debug.
                             // printf ("State3: TK_KEYWORD={%s} KWRETURN, line %d \n", 
                                 //real_token_buffer, lexer_currentline );
 
-                            token = parse_return(TK_KEYWORD);
+                            token = parse_return(TK_KEYWORD, &__return_value);
                             // Expected: ';'.
                             if (token != TK_SEPARATOR){
                                 printf ("State3: TK_KEYWORD TK_SEPARATOR fail\n");
                                 exit (1);
                             }
+                            // Emit return value.
+                            printf("Return value: %lu   :)\n", __return_value);
                             State = 1;
                             break;
                         }

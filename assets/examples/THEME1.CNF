@@ -9,5 +9,13 @@ box One
     meta i_05(){ name("footer");   content("Footer");              }
 
     /* meta i_06(){ name("open"); content("THEME1.CNF");  } */
+
+
+meta Expression00()
+{
+    //return 1 + 2;
+    return 100 * 8;
+}
+
 ] 
 

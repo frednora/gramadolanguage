@@ -449,9 +449,11 @@ static void push( struct stack *s, int x )
         return;
     }
 
-    s->items[ s->top ] = (int) x;
-    s->top++;
+    printf(">>>> push: %d into %d \n", x, s->top);
 
+    s->items[ s->top ] = (int) x;
+    if (s->top < 32)
+        s->top++;
 }
 
 static int pop (struct stack *s)
@@ -474,7 +476,9 @@ static int pop (struct stack *s)
     }
 
     Value = (int) s->items[s->top];
-    s->top--;
+    printf("<<<< pop: %d from %d \n", Value, s->top);
+    if (s->top > 0)
+        s->top--;
 
     return (int) Value;
 }
@@ -598,7 +602,7 @@ static int eval(void)
                     exit(1);
                 }
                 DigitCounter++;
-                printf(">>>>PUSH digit\n");
+                //printf(">>>>PUSH digit\n");
                 push( &stk, (int) MyInteger );
                 if (OperatorFound == TRUE)
                 {
@@ -618,6 +622,7 @@ static int eval(void)
     }
 
 // O resultado é o que sobrou na pilha.
+    stk.top--;  // Get last included.
     int FinalValue = pop(&stk);
     return (int) FinalValue;
 }
