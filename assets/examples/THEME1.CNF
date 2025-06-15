@@ -1,29 +1,38 @@
 
 box One 
 [
-    meta i_00(){ name("header");   content("Hello world!");  }
-    meta i_01(){ name("section");  content("Section 1");     }
-    meta i_02(){ name("section");  content("Section 2");     }
-    meta i_03(){ name("article");  content("This is an article");  }
-    meta i_04(){ name("legend");   content("This is a legend");    }
-    meta i_05(){ name("footer");   content("Footer");              }
+    meta i_00(){ name("header");   content("Hello world!"); return 1 + 2; }
+    meta i_01(){ name("section");  content("Section 1");    return 1 + 2; }
+    meta i_02(){ name("section");  content("Section 2");    return 1 + 2; }
+    meta i_03(){ name("article");  content("This is an article"); return 1 + 2; }
+    meta i_04(){ name("legend");   content("This is a legend");   return 1 + 2; }
+    meta i_05(){ name("footer");   content("Footer");             return 1 + 2; }
 
     /* meta i_06(){ name("open"); content("THEME1.CNF");  } */
 
 
 meta Expression00()
 {
+    // String can't be empty
+    name("default-name");
+
+    // String can't be empty
+    content("Expression test");    
+
     //return 1 + 2;
-    //return 100 * 8;
+    //return 1000 * 8;
     //return;
     //return 8 / 2;
     //return 17 % 3;
     //return 6 & 3;
     //return 6 | 3;
     //return 6 ^ 3;
-
     //return 5 < 7;
-    return 5 > 7;
+    //return 5 > 7;
+
+// return statement finilizes the meta f() thingy
+    //return 1000*9;
+    return;
 }
 
 ] 

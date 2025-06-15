@@ -1,8 +1,9 @@
-
 // globals.c
+// Created by Fred Nora.
 
 #include "gramcnf.h"
 
+// This is the global data structure for the metadata.
 struct metadata_d  metadata[32];
 
 // -- Counters --------

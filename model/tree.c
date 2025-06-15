@@ -887,15 +887,13 @@ do_bst:
     //printf("*debug breakpoint");
     //while(1){}    
 
-//
 // Eval
-//
-
 // This is the moment where we get the final result.
-
     unsigned long ret_val=0;
+
     ret_val = (unsigned long) eval(); 
-    printf("result: >>>>> %d\n",ret_val);
+
+    printf("tree.c: result={%lu}\n",ret_val);
     return (unsigned long) ret_val; 
 done:
     return (unsigned long) ret_val;

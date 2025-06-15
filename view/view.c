@@ -31,32 +31,34 @@ static int CreateAsmFile(void)
 {
     int filedes=0;
 
-    filedes = creat( "output.asm",
-                 S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
-    if (filedes != -1) {
+    filedes = 
+        (int) creat( "output.asm", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
+    if (filedes != -1) 
+    {
         /* process file */
         // close( filedes );
         //return EXIT_SUCCESS;
         return (int) filedes;
     }
 
-    return -1;
+    return (int) -1;
 }
 
 static int CreateAppFile2(void)
 {
     int filedes=0;
 
-    filedes = creat( "index.html",
-                 S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
-    if (filedes != -1) {
+    filedes = 
+        (int) creat( "index.html", S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
+    if (filedes != -1) 
+    {
         /* process file */
         // close( filedes );
         //return EXIT_SUCCESS;
         return (int) filedes;
     }
 
-    return -1;
+    return (int) -1;
 }
 
 // Generate a html output file baseed on the metadata structure.
@@ -105,7 +107,6 @@ static int __generate_html_output_file(void)
     // body
     strcat(html_buffer, "<body>\n");
 
-
 /*
 // #bugbug: Buffer overflow
 // Insert enhancements here
@@ -125,19 +126,23 @@ strcat(html_buffer, "<hr>\n");
 // ------------------------------------------------------
 */
 
+    printf("\n");
+
 // Metadata
     for (i=0; i<MetadataMaxIndex; i++)
     {
         if (metadata[i].initialized == TRUE)
         {
-            printf("\n");
-            printf("id{%d}: tag{%s} name{%s} content{%s}\n",
+            // Printing metadata info
+
+            printf("id{%d}: tag{%s} name{%s} content{%s} return{%lu}\n",
                 metadata[i].id,
                 metadata[i].meta_tag,
                 metadata[i].name,
-                metadata[i].content );
-            //printf("name{%s}\n",    metadata[i].name); 
-            //printf("content{%s}\n", metadata[i].content);
+                metadata[i].content,
+                metadata[i].return_value );
+
+            // Generating html output
 
             // header
             if ( strncmp( metadata[i].name, "header", 6) == 0 )

@@ -1,5 +1,5 @@
-
 // globals.h
+// Created by Fred Nora.
 
 #ifndef __GLOBALS_H
 #define __GLOBALS_H    1
@@ -11,23 +11,38 @@
 #define CONTENT_COUNT_MAX  128
 // ...
 
-// We need 2 asm statement inside a block {} to fill
-// a single structure.
+
+// This is the global data structure for the metadata.
+// We need at least two statement inside a box[] block  
+// in order to fill a single structure. name="" and content="",
+// but maybe we're gonna allow more of these.
 struct metadata_d
 {
-    int id;
     int initialized;
 
+// Tag identification
+    int id;
     char meta_tag[64];
     size_t tag_size;
 
+// name="" element.
     char name[64];
     size_t name_size;
 
+// content="" element.
     char content[128];
     size_t content_size;
+
+    // ...
+
+// Each meta thingy(){} can have a return value,
+// just like a function.
+    unsigned long return_value;
 };
-//#define ???MAX  32
+
+//#define METADATA_COUNT_MAX  32
+//#define METADATA_COUNT_MAX  1024
+// This is the global data structure for the metadata.
 extern struct metadata_d  metadata[32];
 
 // Contador para não estourar a lista. 
@@ -41,6 +56,7 @@ extern int special_count;
 extern int maxtoken;       /* Current length of token buffer */
 extern char *token_buffer; /* Pointer to token buffer */
 
+// #todo: Change this MAXTOKEN name.
 #define MAXTOKEN  256 
 extern char real_token_buffer[MAXTOKEN];
 

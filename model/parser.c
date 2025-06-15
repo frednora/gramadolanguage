@@ -434,18 +434,21 @@ static int parse_content(int token)
                 real_token_buffer,
                 string_size );
             metadata[meta_index].content_size = string_size;
-            metadata[meta_index].initialized = TRUE;
+            
+            // #test
+            // Let's finalize the meta f() only at the return statement.
+
+            //metadata[meta_index].initialized = TRUE;
             //printf("INITIALIZED\n");
             
-            // Salva o index.
-            metadata[meta_index].id = (int) meta_index;
-            
+            //metadata[meta_index].id = (int) meta_index; // Save id
+
             // Só muda de index depois de 2 strings.
-            meta_index++;
-            if (meta_index >= 32){
-                printf("meta_index limits\n");
-                goto error0;
-            }
+            //meta_index++;
+            //if (meta_index >= 32){
+                //printf("meta_index limits\n");
+                //goto error0;
+            //}
 
             // Come back to first stage.
             meta_stage=0;
@@ -2234,11 +2237,31 @@ int parse(int dump_output)
                             token = parse_return(TK_KEYWORD, &__return_value);
                             // Expected: ';'.
                             if (token != TK_SEPARATOR){
-                                printf ("State3: TK_KEYWORD TK_SEPARATOR fail\n");
-                                exit (1);
+                                printf ("State3: KWRETURN expected separator\n");
+                                exit(1);
                             }
-                            // Emit return value.
-                            printf("Return value: %lu   :)\n", __return_value);
+
+                            // #debug
+                            printf("Return value: >>> %lu for meta_index={%d}\n", 
+                                __return_value, meta_index );
+
+                            // Save the return value.
+                            metadata[meta_index].return_value = (unsigned long) __return_value;
+
+                            // Initializing the meta f() only at the return statement.
+
+                            metadata[meta_index].initialized = TRUE;
+                            //printf("INITIALIZED\n");
+            
+                            metadata[meta_index].id = (int) meta_index; // Save id
+
+                            // Só muda de index depois de return.
+                            meta_index++;
+                            if (meta_index >= 32){
+                                printf("meta_index limits\n");
+                                exit(0);
+                                //goto error0;
+                            }
                             State = 1;
                             break;
                         }
