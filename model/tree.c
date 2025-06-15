@@ -499,13 +499,32 @@ static int oper(char c, int opnd1, int opnd2)
     case '*':  return (opnd1 * opnd2);  break;  // '*'
     case '+':  return (opnd1 + opnd2);  break;  // '+'
     case '-':  return (opnd1 - opnd2);  break;  // '-' 
-    case '/':  return (opnd1 / opnd2);  break;  // '/'
 
-    // #todo
-    // Yes we have some pow functions in math.c
-    case '^': 
-        return 0; //return(pow(opnd1,opnd2));
+// '/'
+    case '/':
+        if (opnd2 == 0) {
+            printf("oper: Division by zero!\n");
+            return 0; // or handle as needed
+        }
+        return (opnd1 / opnd2);  
         break;
+
+// '%'
+    case '%':
+        if (opnd2 == 0) {
+            printf("oper: Modulo by zero!\n");
+            return 0;
+        }
+        return (opnd1 % opnd2);  
+        break;
+
+    case '&':  return (opnd1 & opnd2);  break;   // bitwise AND
+    case '|':  return (opnd1 | opnd2);  break;   // bitwise OR
+    case '^':  return (opnd1 ^ opnd2);  break;   // bitwise XOR
+    case '<':  return (opnd1 < opnd2);  break;   // less than
+    case '>':  return (opnd1 > opnd2);  break;   // greater than
+    //case '=':  return (opnd1 == opnd2);  break;  // equality
+    //case '!':  return (opnd1 != opnd2);  break;  // not equal
 
     //...
 
@@ -723,6 +742,7 @@ unsigned long tree_eval(void)
 
         // Constants: Números ou separadores.
         case TK_CONSTANT:
+            printf("tree_eval: TK_CONSTANT\n");
             exp_buffer[exp_offset] = (int) atoi(real_token_buffer);
             exp_offset++;
             // Depois de um numero espera-se 
@@ -764,6 +784,7 @@ unsigned long tree_eval(void)
         case '^':
         case '!':
         case '=':
+            printf("tree_eval: TK_OPERATOR %c\n", (char) c);
             exp_buffer[exp_offset] = (int) c;
             exp_offset++;
             // Depois do operador esperamos 
@@ -785,11 +806,27 @@ unsigned long tree_eval(void)
             }
             // ';'
             if ( strncmp( (char *) real_token_buffer, ";", 1 ) == 0  )
-            {
+            {  
                 printf("tree_eval: ';' was found\n");
                 exp_buffer[exp_offset] = (int) 0;
                 //exp_offset++;
                 goto do_bst;  // #done
+            }
+            break;
+
+        case TK_ARITHCOMPARE:
+            //printf("tree_eval: TK_ARITHCOMPARE %c\n", real_token_buffer[0]);
+            if (lexer_expression == LT_EXPR)
+            {
+                exp_buffer[exp_offset] = (int) '<';
+                exp_offset++;
+                State=1;
+            }
+            if (lexer_expression == GT_EXPR)
+            {
+                exp_buffer[exp_offset] = (int) '>';
+                exp_offset++;
+                State=1;
             }
             break;
         

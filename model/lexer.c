@@ -1,4 +1,3 @@
-
 // lexer.c
 // Inspired on gcc 0.9.
 // 2018 - Created by Fred Nora.
@@ -210,9 +209,10 @@ begin:
                 
                 //#### inicia um comentário de uma linha ####
                 //Aqui encontramos a segunda barra de dias consecutivas.
-                //single line comments.
+                // Single line comments
                 if (c == '/')
                 {
+                    // Skip until end of line
                     while (1)
                     {
                         c = getc(finput);
@@ -239,6 +239,7 @@ begin:
 				//printf("__skip_white_space: todo: depois da barra / .");
 				//exit(1);
 
+                // Multi-line comments
                 if (c == '*')
                 {
                     c = getc(finput);
@@ -303,8 +304,12 @@ begin:
                 // isso significa que estamos eliminando espaços dentro de uma expressão.
 				// então vamos retornar a barra para que a rotina continue 
 				// tratando a expressão.
+                
+                // Here after the slash we didn't find '*' or '/'
+                // so let's return the slash for further processing
+                // Not a comment, it's the division operator!
                 ungetc ( c, finput );
-				//return (int) '/';
+				return (int) '/';
                 break;
 
             //#test 
@@ -694,7 +699,7 @@ again:
             constant_done:
             break;
 
-        //String
+        // String
         case '\"':
         {
             c = getc(finput);
@@ -750,9 +755,9 @@ again:
             value = TK_SEPARATOR;
             break;
 
-        //usadas em expressões matemáticas, 
-        //#todo: não mudar isso.
-        //@todo: talvez se enviarmos esses chars para o buffer ajude no debug.
+        // usadas em expressões matemáticas, 
+        // #todo: não mudar isso.
+        // @todo: talvez se enviarmos esses chars para o buffer ajude no debug.
         case '+':  case '-':  case '*':  case '/':
         case '<':  case '>':
         case '&':
@@ -787,8 +792,8 @@ again:
 
             c1 = getc (finput);
 
-            if (c1 == '=')
-            {
+            if (c1 == '='){
+
                 switch (c)
                 {
                     case '<':
@@ -813,7 +818,7 @@ again:
                 value = TK_ASSIGN; 
                 goto done;
 
-            }else if (c == c1){
+            } else if (c == c1){
 
                 switch (c)
                 {
@@ -826,7 +831,7 @@ again:
                     case '>':  c = TK_RSHIFT;  goto combine;
                 };
 
-            }else if ((c == '-') && (c1 == '>')) {
+            } else if ((c == '-') && (c1 == '>')) {
                 value = TK_POINTSAT; 
                 goto done; 
             };
