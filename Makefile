@@ -1,4 +1,4 @@
-# Create the interpreter for the gramado language.
+# Create the interpreter for the Gramado language.
 # Usage:
 # $ ./gramado -s THEME1.CNF --stats 
 # Created by Fred Nora.

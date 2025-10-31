@@ -1,8 +1,6 @@
-/*
- * gramcnf.h
- *     This is the main header.
- *  2018 - Created by Fred Nora.
- */
+// gramcnf.h
+// This is the main header for Gramado interpreter.
+// 2018 - Created by Fred Nora.
 
 // Missing
 #define FALSE  0

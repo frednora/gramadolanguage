@@ -1,5 +1,5 @@
-
 // lexer.h
+// Created by Fred Nora.
 
 #ifndef __LEXER_H
 #define __LEXER_H    1
@@ -30,10 +30,17 @@ extern int current_special;
 // 'EOF'
 #define ENDFILE  -1  
 
-// ------------------------------------------
-// Lexer codes
-// See: variable 'lexer_expression'.
+
+// Line support
+extern int lexer_currentline;  // Current line number
+extern int lexer_firstline;
+extern int lexer_lastline;
+extern int lexer_number_of_lines;  // Total number of lines
+
+// lexerexpr_t:
+// Lexer expressions
 typedef enum {
+
     LEXERCODE_NULL,
     PLUS_EXPR,       //  1
     MINUS_EXPR,      //  2 
@@ -51,19 +58,12 @@ typedef enum {
     GE_EXPR,         // 14
     NE_EXPR,         // 15
     EQ_EXPR          // 16
-}lexerexpr_t;  //lexercode_t;
 
-//
-// Line support
-//
+} lexerexpr_t;
 
-extern int lexer_currentline;  //lineno;  // Current line.
-extern int lexer_firstline;
-extern int lexer_lastline;
-extern int lexer_number_of_lines;   // Total numbe rof lines.
+// Expressions
+extern int lexer_expression;
 
-// Expressions.
-extern int lexer_expression;  //lexer_code;
 
 // Token support.
 extern int lexer_token_count;
@@ -82,7 +82,6 @@ extern int constant_type_found;
 extern int constant_base_found;
 extern int return_found;
 extern int main_found;
-
 
 //
 // Return support
@@ -118,11 +117,12 @@ extern int brace_count;
 // -- Prototypes --------
 //
 
-// Initialize
-int lexer_initialize(void);
-// Get stuff.
+
+// Get next token
 int yylex(void);
+
 void error(char *msg);
+
 //int check_newline ();
 //Isso pega o código original, retira os espaços 
 //e separa em palavras usando o espaço como delimitador.
@@ -131,6 +131,13 @@ void error(char *msg);
 //int getElementID ( char *s );
 //int getElementClass ( int number );
 //...
+
+//
+// #
+// INITIALIZATION
+//
+
+int lexer_initialize(void);
 
 #endif    
 

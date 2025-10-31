@@ -12,7 +12,6 @@ extern long id[ID_MAX];
 // Elementos que explicam a constante.
 extern long constant[CONSTANT_MAX];
 
-
 // Salvando a string das constantes,
 // onde a constante será armazenada dependendo do tipo.
 extern char constant_byte[2];   //0xFF
@@ -26,17 +25,14 @@ extern char constant_before[2];
 // Isso varia com a base. Ex: H, B.
 extern char constant_after[2];
 
-
 //--------------------
 extern long return_info[8];
-
 
 extern unsigned long functionList[FUNCTION_COUNT_MAX];
 
 // #test
 //#define gramc_skip_blanks(p)     {while (*(p) == ' ') { (p)++; }}
 //#define gramc_skip_nonblanks(p)  {while (*(p) && *(p) != ' ') { (p)++; }}
-
 
 // Espiada, olhadinha.
 // #importante
@@ -128,7 +124,6 @@ struct function_d
 };
 //extern struct function_d  *function_main;
 
-
 // Estrutura para gerenciar o programa.
 struct program_d
 {
@@ -201,7 +196,6 @@ static char *rw[] = {
     "register", 
     "volatile" 
 };
-
 
 /* 
  Different name spaces for symbols.  Looking up a symbol specifies
@@ -363,7 +357,6 @@ static enum rid rid[] = {
 //
 // -- Prototypes --------
 //
-
 
 
 //int parserCreateMain( char **list );

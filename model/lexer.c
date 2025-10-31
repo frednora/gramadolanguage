@@ -19,13 +19,13 @@ int current_special=0;
 // Line support
 //
 
-int lexer_currentline=0;  //lineno=0; // Current line number.
+int lexer_currentline=0;  // Current line number
 int lexer_firstline=0;
 int lexer_lastline=0;
-int lexer_number_of_lines=0;  // Total number of lines.
+int lexer_number_of_lines=0;  // Total number of lines
 
-// Expressions.
-int lexer_expression=0;  //lexer_code=0;
+// Expressions
+int lexer_expression=0;
 
 // Token support
 int lexer_token_count=0;
@@ -339,9 +339,34 @@ begin:
     }; // for
 }
 
-// -----------------------------------------
+/*
+//check subsequent
+int check_subseq ( int c, int a, int b )
+{
+	//extern getchar, peekc;
+
+	if (!peekc)
+		peekc = getchar();
+	
+	//se for diferente de c, retorna a.
+	//se for igual a c, retorn b.
+	
+	if (peekc != c)
+		return (a);
+	
+	peekc = 0;
+	
+	return (b);
+};
+*/
+
+void error(char *msg)
+{
+    printf ("error: %s\n", msg );
+}
+
 // yylex:
-// Pega o próximo token.
+// Get the next token
 int yylex(void)
 {
     register int value=0;
@@ -351,15 +376,15 @@ int yylex(void)
     register int number_length=0;
 
 again:
-// Pega um char da stream de entrada.
+// Get the next char from the input stream.
     c = (int) __skip_white_space();
 
     switch (c)
     {
         // 0 or EOF. (-1).
         // #bugbug: We are not reaching this point!
-		case EOF:
         case 0:
+        case EOF:
             printf ("yylex: 0 or EOF\n");
             eofno++; 
             value = TK_EOF;
@@ -652,7 +677,7 @@ again:
                         if ( isxdigit(c) == 0 )
                         {
                             *p = 0;
-                             ungetc( c, finput );
+                            ungetc( c, finput );
                             //fim
                             value = TK_CONSTANT;
                             //constant_type_found = //#todo tem que contar. 
@@ -862,11 +887,9 @@ done:
 	return (int) value;
 }
 
-/*
- * __lexerInit:
- *     The routine initializes the lexer.
- *     This is a worker, called by lexer_initialize().
- */
+// __lexerInit:
+// The routine initializes the lexer.
+// This is a worker, called by lexer_initialize().
 static int __lexerInit(void)
 {
     register int i=0;
@@ -917,37 +940,17 @@ static int __lexerInit(void)
     return 0;
 }
 
+//
+// #
+// INITIALIZATION
+//
+
 int lexer_initialize(void)
 {
     //printf ("parser_initialize:\n");
     return (int) __lexerInit();
 }
 
-/*
-//check subsequent
-int check_subseq ( int c, int a, int b )
-{
-	//extern getchar, peekc;
-
-	if (!peekc)
-		peekc = getchar();
-	
-	//se for diferente de c, retorna a.
-	//se for igual a c, retorn b.
-	
-	if (peekc != c)
-		return (a);
-	
-	peekc = 0;
-	
-	return (b);
-};
-*/
-
-void error(char *msg)
-{
-    printf ("error: %s\n", msg );
-}
 
 //
 // End

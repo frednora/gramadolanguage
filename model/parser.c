@@ -1673,19 +1673,18 @@ expression_exit:
     return (unsigned long) Result;
 }
 
-// -------------------------
 // parse:
-// Função principal.
-// Pegando tokens com o lexer e fazendo coisas ...
-// IN: Dump output file.
-int parse(int dump_output)
-{
+// Main function.
+// It gets the next token with the lexer.
 // Stages:
 // 1: modifier, type, metatag, separator
 // 2: identifier.
 // 3: keyword.
 // 4: separator. Only ';'.
-
+// IN: 
+// + Dump output file or not.
+int parse(int dump_output)
+{
     int running = 1;
     register int token=0;
     int i=0;

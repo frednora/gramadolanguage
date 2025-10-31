@@ -5,6 +5,146 @@
 #define __TOKEN_H    1
 
 // ----------------------------------
+// value = token type.
+// Enumeração dos tipos de tokens.
+typedef enum {
+
+// Token index.
+// Classes de tokens.
+
+    TK_NULL,
+    TK_EOF,
+    TK_KEYWORD, // Reserved words.
+    TK_IDENTIFIER, // Function name, variable name.
+    TK_CONSTANT, // 10 20 0x1234 ... (literals?)
+    TK_STRING, // "This is a string"
+    TK_OPERATOR,  // math: + - * / % | & ^ =
+    TK_SEPARATOR, // Separators (){}[],.;:? ...
+    TK_SPECIAL, // O resto: $ # & <= >= -= += ! && || ++ -- \" \' ...
+    TK_QUALIFIER,  // static volatile ... ? #todo?
+    TK_MODIFIER, // signed, unsigned ...
+    TK_TYPE,
+    TK_ARITHCOMPARE,
+    TK_EQCOMPARE,
+    TK_ASSIGN,           // =
+    TK_PLUSPLUS,
+    TK_MINUSMINUS,
+    TK_ANDAND,
+    TK_OROR,
+    TK_LSHIFT,
+    TK_RSHIFT,
+    TK_POINTSAT
+}token_t;
+
+#define TOKEN_CHAR   "char"
+#define TOKEN_SHORT  "short"
+#define TOKEN_INT    "int"
+#define TOKEN_LONG   "long"
+#define TOKEN_VOID  "void"
+#define TOKEN_BOOL  "bool"
+#define TOKEN_FLOAT   "float"
+#define TOKEN_DOUBLE  "double"
+
+#define TOKEN_SIGNED    "signed"
+#define TOKEN_UNSIGNED  "unsigned"
+
+#define TOKEN_IF    "if"
+#define TOKEN_ELSE  "else"
+
+#define TOKEN_DO     "do"
+#define TOKEN_WHILE  "while"
+
+#define TOKEN_FOR      "for"
+
+#define TOKEN_SWITCH   "switch"
+#define TOKEN_CASE     "case"
+#define TOKEN_DEFAULT  "default"
+#define TOKEN_BREAK     "break"
+#define TOKEN_CONTINUE  "continue"
+
+#define TOKEN_GOTO "goto"
+#define TOKEN_RETURN "return"
+
+#define TOKEN_VOLATILE "volatile"
+#define TOKEN_INLINE "inline"
+#define TOKEN_STATIC "static"
+#define TOKEN_CONST "const"
+
+#define TOKEN_DEFINE   "define"
+#define TOKEN_TYPEDEF  "typedef"
+
+#define TOKEN_ENUM "enum"
+#define TOKEN_SCTRUCT "struct"
+#define TOKEN_UNION "union"
+
+#define TOKEN_SIZEOF "sizeof"
+#define TOKEN_ASM "asm"
+
+// ...
+
+// Special identifiers
+#define TOKEN_MAIN  "main"
+//...
+
+//constants.
+#define TOKEN_ZERO   "0"
+#define TOKEN_ONE    "1"
+#define TOKEN_TWO    "2"
+#define TOKEN_THREE  "3"
+#define TOKEN_FOUR   "4"
+#define TOKEN_FIVE   "5"
+#define TOKEN_SIX    "6"
+#define TOKEN_SEVEN  "7"
+#define TOKEN_EIGHT  "8"
+#define TOKEN_NINE   "9"
+//...
+
+//strings
+#define TOKEN_STRING_NULL  "null"
+#define TOKEN_STRING_NIL   "nil"
+//...
+
+//Operators. (math)
+
+// Arithmetic Operators
+#define TOKEN_ADD  "+"
+#define TOKEN_SUB  "-"
+#define TOKEN_MUL  "*"
+#define TOKEN_DIV  "/"
+#define TOKEN_MOD  "%"
+#define TOKEN_INC  "++"
+#define TOKEN_DEC  "--"
+//#define TOKEN_?? "+="
+//#define TOKEN_?? "-="
+
+//Relational Operators
+// == != > < >= <=
+//#define TOKEN_?? "=="
+//#define TOKEN_?? "!="
+//#define TOKEN_?? ">"
+//#define TOKEN_?? "<"
+//#define TOKEN_?? ">="
+//#define TOKEN_?? "<="
+//...
+
+/*
+//separators.
+//(){}[],.;:? 
+#define TOKEN_ADD "(" Parentheses
+#define TOKEN_ADD ")"
+#define TOKEN_ADD "{" Braces 
+#define TOKEN_ADD "}"
+#define TOKEN_ADD "[" Square brackets
+#define TOKEN_ADD "]"
+#define TOKEN_ADD "," Comma 
+#define TOKEN_ADD "." Period
+#define TOKEN_ADD ";" Semicolon
+#define TOKEN_ADD ":"
+#define TOKEN_ADD "?"
+//...
+*/
+
+// ----------------------------------
 // keyword_found = Índice de keywords.
 // Keywords
 typedef enum {
@@ -45,38 +185,6 @@ typedef enum {
 }keywords_t;
 
 // ----------------------------------
-// value = token type.
-// Enumeração dos tipos de tokens.
-typedef enum {
-
-// Token index.
-// Classes de tokens.
-
-    TK_NULL,
-    TK_EOF,
-    TK_KEYWORD, // Reserved words.
-    TK_IDENTIFIER, // Function name, variable name.
-    TK_CONSTANT, // 10 20 0x1234 ... (literals?)
-    TK_STRING, // "This is a string"
-    TK_OPERATOR,  // math: + - * / % | & ^ =
-    TK_SEPARATOR, // Separators (){}[],.;:? ...
-    TK_SPECIAL, // O resto: $ # & <= >= -= += ! && || ++ -- \" \' ...
-    TK_QUALIFIER,  // static volatile ... ? #todo?
-    TK_MODIFIER, // signed, unsigned ...
-    TK_TYPE,
-    TK_ARITHCOMPARE,
-    TK_EQCOMPARE,
-    TK_ASSIGN,           // =
-    TK_PLUSPLUS,
-    TK_MINUSMINUS,
-    TK_ANDAND,
-    TK_OROR,
-    TK_LSHIFT,
-    TK_RSHIFT,
-    TK_POINTSAT
-}token_t;
-
-// ----------------------------------
 // type_found = Indice de tipo;
 // Enumeração dos tipos de dados.
 typedef enum {
@@ -110,7 +218,7 @@ typedef enum {
     //...
 }qualifiers_t;
  
-// String s passadas para o parser.
+// Strings passadas para o parser.
 #define TOKENNULL_STRING        "N"
 #define TOKENKEYWORD_STRING     "KW"   // int while void.
 #define TOKENIDENTIFIER_STRING  "ID"   // var1, total ...
@@ -190,105 +298,8 @@ extern char *SPECIALLIST[TLIMIT];
 //#define TOKEN_ELLIPSIS ?
  
  
-// keywords. 
 
-//types
-#define TOKEN_CHAR   "char"
-#define TOKEN_SHORT  "short"
-#define TOKEN_INT    "int"
-#define TOKEN_LONG   "long"
-#define TOKEN_VOID  "void"
-#define TOKEN_BOOL  "bool"
-#define TOKEN_FLOAT   "float"
-#define TOKEN_DOUBLE  "double"
-#define TOKEN_SIGNED    "signed"
-#define TOKEN_UNSIGNED  "unsigned"
-#define TOKEN_IF    "if"
-#define TOKEN_ELSE  "else"
-#define TOKEN_DO     "do"
-#define TOKEN_WHILE  "while"
-#define TOKEN_FOR      "for"
-#define TOKEN_SWITCH   "switch"
-#define TOKEN_CASE     "case"
-#define TOKEN_DEFAULT  "default"
-#define TOKEN_BREAK     "break"
-#define TOKEN_CONTINUE  "continue"
-#define TOKEN_RETURN "return"
-#define TOKEN_GOTO "goto"
-#define TOKEN_ASM "asm"
-#define TOKEN_VOLATILE "volatile"
-#define TOKEN_INLINE "inline"
-#define TOKEN_STATIC "static"
-#define TOKEN_CONST "const"
-#define TOKEN_DEFINE   "define"
-#define TOKEN_TYPEDEF  "typedef"
-#define TOKEN_SIZEOF "sizeof"
-#define TOKEN_ENUM "enum"
-#define TOKEN_SCTRUCT "struct"
-#define TOKEN_UNION "union"
-// ...
 
-// Special identifiers
-#define TOKEN_MAIN  "main"
-//...
-
-//constants.
-#define TOKEN_ZERO   "0"
-#define TOKEN_ONE    "1"
-#define TOKEN_TWO    "2"
-#define TOKEN_THREE  "3"
-#define TOKEN_FOUR   "4"
-#define TOKEN_FIVE   "5"
-#define TOKEN_SIX    "6"
-#define TOKEN_SEVEN  "7"
-#define TOKEN_EIGHT  "8"
-#define TOKEN_NINE   "9"
-//...
-
-//strings
-#define TOKEN_STRING_NULL  "null"
-#define TOKEN_STRING_NIL   "nil"
-//...
-
-//Operators. (math)
-
-// Arithmetic Operators
-#define TOKEN_ADD  "+"
-#define TOKEN_SUB  "-"
-#define TOKEN_MUL  "*"
-#define TOKEN_DIV  "/"
-#define TOKEN_MOD  "%"
-#define TOKEN_INC  "++"
-#define TOKEN_DEC  "--"
-//#define TOKEN_?? "+="
-//#define TOKEN_?? "-="
-
-//Relational Operators
-// == != > < >= <=
-//#define TOKEN_?? "=="
-//#define TOKEN_?? "!="
-//#define TOKEN_?? ">"
-//#define TOKEN_?? "<"
-//#define TOKEN_?? ">="
-//#define TOKEN_?? "<="
-//...
-
-/*
-//separators.
-//(){}[],.;:? 
-#define TOKEN_ADD "(" Parentheses
-#define TOKEN_ADD ")"
-#define TOKEN_ADD "{" Braces 
-#define TOKEN_ADD "}"
-#define TOKEN_ADD "[" Square brackets
-#define TOKEN_ADD "]"
-#define TOKEN_ADD "," Comma 
-#define TOKEN_ADD "." Period
-#define TOKEN_ADD ";" Semicolon
-#define TOKEN_ADD ":"
-#define TOKEN_ADD "?"
-//...
-*/
 
 
 /*
