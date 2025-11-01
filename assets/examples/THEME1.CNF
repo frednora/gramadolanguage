@@ -6,10 +6,17 @@ box One
     meta i_02(){ name("section");  content("Section 2");    return 1 + 2; }
     meta i_03(){ name("article");  content("This is an article"); return 1 + 2; }
     meta i_04(){ name("legend");   content("This is a legend");   return 1 + 2; }
-    meta i_05(){ name("footer");   content("Footer");             return 1 + 2; }
 
-    /* meta i_06(){ name("open"); content("THEME1.CNF");  } */
-
+    meta i_05(){ 
+        name("print"); 
+        content("<div class='gramado-container'>This is a print</div>"); 
+        return 1 + 2;  
+    }
+    meta i_06(){ 
+        name("echo"); 
+        content("<div class='gramado-container'>This is a echo</div>"); 
+        return 1 + 2;  
+    }
 
 meta Expression00()
 {
@@ -35,5 +42,10 @@ meta Expression00()
     return;
 }
 
+    meta m_footer(){ 
+        name("footer"); 
+        content("Footer"); 
+        return 1 + 2; 
+    }
 ] 
 

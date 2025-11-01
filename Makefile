@@ -33,6 +33,7 @@ all:
 	-cp ./assets/examples/TEST1.CNF    build/
 	-cp ./assets/usage.txt             build/
 	-cp ./assets/Makefile              build/
+	-cp ./assets/LOAD.TXT              build/
 	rm *.o  
 
 	@echo "Go to build/ folder and type make";

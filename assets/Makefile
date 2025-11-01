@@ -12,8 +12,7 @@ all:
 	-cp gramado.js   $(appName)/
 	-cp index.html   $(appName)/
 	-cp output.asm   $(appName)/
-
+	-cp LOAD.TXT     $(appName)/
 #clean:
 #
-
 
